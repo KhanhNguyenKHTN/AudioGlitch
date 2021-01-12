@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="chuong">The audio element</h1>
+    <button onclick="previus()">Previus</button>
+    <button onclick="next()">Next</button>
+    <p id="Info">Click on the play button to play a sound:</p>
+    <div>
+      <input id="Chuong"/>
+      <button onclick="go()"> Go </button>
+    </div>
+    <audio controls id="myAudio" autoplay playsinline>
+      <source src="/other/TMTT/177.mp3" id="audioSource" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <button onclick="setPlaySpeed()"> Tang </button>
+    <button onclick="setPlaySpeedLow()"> Giam </button>
+  </body>
+ <script>
+    var vid = document.getElementById("myAudio");
+    var test = document.getElementById("Info");
+    var title = document.getElementById("chuong");
+    var CurId = 71;
+    vid.playbackRate = 1.2;
+    test.innerText = vid.playbackRate;
+
+    function setPlaySpeed() { 
+      vid.playbackRate += 0.1;
+      test.innerText = vid.playbackRate;
+    } 
+    function previus(){
+      CurId--;
+      var source = document.getElementById('audioSource');
+      var name = '/other/TMTT/' + CurId + '.mp3';//'//other/TMTT/:id'
+      source.src = name;
+      title.innerText = name;
+      vid.load(); //call this to just preload the audio without playing
+      vid.play(); //call this to play the song right away
+      vid.playbackRate = 1.2;
+    }
+    function next(){
+      CurId++;
+      var source = document.getElementById('audioSource');
+      var name = '/other/TMTT/' + CurId + '.mp3';
+      source.src = name;
+      title.innerText = name;
+      vid.load(); //call this to just preload the audio without playing
+      vid.play(); //call this to play the song right away
+      vid.playbackRate = 1.2;
+    }
+    vid.onended = function() {
+      next();
+    };
+    function setPlaySpeedLow() { 
+      vid.playbackRate -= 0.1;
+      test.innerText = vid.playbackRate;
+    } 
+    function go() {
+      var input = document.getElementById("Chuong").value;
+      CurId = parseInt(input);
+      var source = document.getElementById('audioSource');
+      var name = '/other/TMTT/' + CurId + '.mp3';
+      source.src = name;
+      title.innerText = name;
+      vid.load(); //call this to just preload the audio without playing
+      vid.play(); //call this to play the song right away
+      vid.playbackRate = 1.2;
+    }
+    </script> 
+</html>
